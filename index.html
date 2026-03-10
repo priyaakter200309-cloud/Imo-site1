@@ -8,83 +8,88 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
-        body { 
-            font-family: 'Noto Sans Bengali', sans-serif; 
-            background-color: #ffffff; 
-            margin: 0;
-            padding: 0;
-        }
-        .card-shadow { 
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06); 
-        }
-        /* বাটনটি ক্লিক করলে হালকা পরিবর্তন হবে */
-        .btn-active:active {
-            transform: scale(0.98);
+        body { font-family: 'Noto Sans Bengali', sans-serif; background-color: #ffffff; }
+        .card-shadow { box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); }
+        
+        /* বাটনটি সক্রিয় হলে নীল রঙ */
+        .btn-active {
+            background-color: #00acee !important;
+            color: white !important;
         }
     </style>
 </head>
 <body class="max-w-md mx-auto min-h-screen bg-white">
 
-    <header class="flex items-center justify-between px-5 py-4">
-        <div class="flex items-center gap-3">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Imo_app_logo.png" class="w-9 h-9" alt="imo">
-            <span class="text-2xl font-bold text-gray-800 tracking-tight">imo</span>
+    <header class="flex items-center justify-between px-5 py-3">
+        <div class="flex items-center gap-2">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Imo_app_logo.png" class="w-8 h-8" alt="imo">
+            <span class="text-xl font-bold text-gray-800">imo</span>
         </div>
         <i class="fa-solid fa-magnifying-glass text-gray-400 text-xl"></i>
     </header>
 
-    <div class="flex items-center px-5 py-4 gap-4 border-b border-gray-100 mb-2">
+    <div onclick="playStories()" class="flex items-center px-5 py-4 gap-4 border-b border-gray-100 cursor-pointer">
         <div class="relative">
             <div class="w-16 h-16 bg-[#00acee] rounded-full flex items-center justify-center">
                 <i class="fa-solid fa-camera text-white text-2xl"></i>
             </div>
-            <span class="absolute -top-1 -right-1 bg-[#4CAF50] text-white text-[11px] px-1.5 py-0.5 rounded-full border-2 border-white font-bold">99</span>
+            <span class="absolute -top-1 -right-1 bg-[#4CAF50] text-white text-[10px] px-1.5 py-0.5 rounded-full border-2 border-white font-bold">3</span>
         </div>
         <div>
-            <h2 class="text-[18px] font-bold text-gray-900">Story</h2>
-            <p class="text-gray-500 text-[14px]">Friends' updates</p>
+            <h2 class="text-[18px] font-bold text-gray-800 leading-tight">Story</h2>
+            <p class="text-gray-500 text-[14px]">Romantic Updates</p>
         </div>
     </div>
 
-    <div class="h-[1px] bg-gray-100 w-full"></div>
-
     <div class="px-5 py-8">
-        <div class="bg-white rounded-[28px] border border-gray-100 card-shadow p-6">
+        <div class="bg-white rounded-[30px] border border-gray-100 card-shadow p-6">
             
             <div class="flex gap-4 items-center mb-6">
-                <div class="relative">
-                    <img src="https://i.ibb.co/Lhy6XzK/1000001390.jpg" class="w-20 h-20 rounded-full object-cover border border-gray-200" alt="Priya Akter">
-                </div>
+                <img src="https://i.ibb.co/3ykfLpP/1000001390.jpg" class="w-20 h-20 rounded-full object-cover border-2 border-white shadow-sm" alt="Profile">
                 <div>
-                    <h1 class="text-[22px] font-bold text-gray-900">Mst: Priya Akter</h1>
-                    <button class="mt-1 bg-[#e0f7fa] text-[#00acc1] text-[13px] font-bold px-4 py-1.5 rounded-lg">
-                        Message Request
-                    </button>
+                    <h1 class="text-[21px] font-bold text-gray-900 leading-tight">Mst: Priya Akter</h1>
+                    <button class="mt-1 bg-[#e0f7fa] text-[#00acc1] text-[13px] font-bold px-4 py-1 rounded-md">Message Request</button>
                 </div>
             </div>
 
-            <div class="text-[15px] text-gray-700 space-y-4 leading-relaxed mb-8">
+            <div class="text-[15px] text-gray-700 space-y-4 leading-relaxed mb-6">
                 <p>Mst: Priya Akter এর imo এবং Whatsapp একাউন্ট Locked করা আছে।</p>
                 <p>Mst: Priya Akter এর সাথে আপনার ইমু নাম্বার Add করতে চাইলে নিচে ফাঁকা ঘরে আপনার ইমু নাম্বার লিখে Add করুন।</p>
                 <p class="font-bold text-gray-900 pt-2">ইমু নাম্বার</p>
             </div>
 
-            <div class="flex items-center border-2 border-[#00acee] rounded-2xl px-4 py-4 mb-8 bg-white">
-                <div class="flex items-center gap-2 border-r border-gray-200 pr-3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Flag_of_Bangladesh.svg" class="w-6 h-4" alt="BD">
-                    <span class="font-bold text-gray-800 text-[17px]">+880</span>
-                    <i class="fa-solid fa-caret-down text-gray-400 text-xs"></i>
-                </div>
-                <input type="tel" placeholder="আপনার ইমু নাম্বার দেন" class="flex-1 pl-4 outline-none text-gray-800 placeholder-gray-400 text-[16px]">
+            <div class="mb-8">
+                <input type="tel" id="phoneNumber" placeholder="এখানে আপনার ইমু নাম্বার দেন" 
+                    class="w-full border-2 border-gray-200 rounded-xl px-5 py-4 outline-none text-gray-800 placeholder-gray-400 text-[16px] focus:border-[#00acee] transition-all">
             </div>
 
-            <button class="w-full bg-[#cbd5e1] text-white py-4 rounded-2xl font-bold text-[18px] flex items-center justify-center gap-2 btn-active transition-all">
-                <span>Add Priya Akter</span>
-                <i class="fa-solid fa-arrow-right text-lg"></i>
+            <button id="addBtn" onclick="goToNextPage()" class="w-full bg-[#cbd5e1] text-white py-4 rounded-xl font-bold text-[18px] transition-all duration-300">
+                Add Priya Akter
             </button>
-
         </div>
     </div>
 
+    <script>
+        const phoneInput = document.getElementById('phoneNumber');
+        const addBtn = document.getElementById('addBtn');
+
+        // নাম্বার লেখা শুরু করলে বাটন নীল হবে
+        phoneInput.addEventListener('input', function() {
+            if (this.value.length > 0) {
+                addBtn.classList.add('btn-active');
+            } else {
+                addBtn.classList.remove('btn-active');
+            }
+        });
+
+        // ক্লিক করলে অন্য পেজে নিয়ে যাবে
+        function goToNextPage() {
+            if (phoneInput.value.length > 0) {
+                window.location.href = 'next_page.html'; // এখানে আপনার কাঙ্ক্ষিত পেজের নাম দিন
+            } else {
+                alert('অনুগ্রহ করে আগে আপনার নাম্বারটি লিখুন');
+            }
+        }
+    </script>
 </body>
 </html>
